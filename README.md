@@ -20,7 +20,7 @@ usage: locktt
 What locktt will do:
  - look for package-lock.json, npm-shrinkwrap.json and yarn.lock files
  - remove the `resolved` and `integrity` fields from the package-lock.json and/or npm-shrinkwrap.json files in case it finds them
- - replace the `resolved` field from yarn.lock file adding `<INTERNAL_REGISTRY>` instead of the host and remove the `integrity` field
+ - replace the `resolved` field from yarn.lock file adding the `--registry` value instead of the host and remove the `integrity` field
  - save the file
 
 locktt will abort if:

@@ -1,6 +1,6 @@
 {
   "name": "lock-treatment-tool",
-  "version": "0.0.3",
+  "version": "0.2.0",
   "description": "Npm (package-lock-json, npm-shrinkwrap.json) and Yarn lock files treatment tool",
   "main": "index.js",
   "repository": {
@@ -29,6 +29,7 @@
     "node": ">=5.1.0"
   },
   "dependencies": {
+    "commander": "^3.0.2",
     "line-reader": "^0.3.0"
   }
 }

@@ -1,8 +1,15 @@
-2019-10-25, Version 0.0.1
+2019-10-28, Version 0.2.0
 =========================
 
-`integrity` field removed from yarn.lock:
+ - yarn.lock: replace the `resolved` host by the one from `--registry` value
+
+2019-10-28, Version 0.1.0
+=========================
+
  - remove the integrity field from yarn.lock file
+
+2019-10-25, Version 0.0.1
+=========================
 
 lock files treatment tool added:
  - look for package-lock.json, npm-shrinkwrap.json and yarn.lock files

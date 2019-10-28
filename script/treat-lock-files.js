@@ -22,11 +22,16 @@
 
 const npmLock = require('../lib/treat-fields/npm.lock');
 const yarnLock = require('../lib/treat-fields/yarn.lock');
+const program = require('commander');
+program
+.option('--registry <value>', 'set the npm registry, specially for yarn');
+program.parse(process.argv);
+console.log(program.opts());
 
 function run(folderPath, outputFolder = folderPath) {
     console.log("Treating fields...");
     npmLock.run(folderPath, outputFolder);
-    yarnLock.run(folderPath, outputFolder);
+    yarnLock.run(folderPath, outputFolder, program.registry);
 }
 
 module.exports.run = run;
