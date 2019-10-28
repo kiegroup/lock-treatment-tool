@@ -3,7 +3,7 @@
 
  - yarn.lock: replace the `resolved` host by the one from `--registry` value
 
-2019-10-28, Version 0.1.0
+2019-10-28, Version 0.0.3
 =========================
 
  - remove the integrity field from yarn.lock file
