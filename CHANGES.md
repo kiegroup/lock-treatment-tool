@@ -1,3 +1,8 @@
+2019-10-29, Version 0.3.1
+=========================
+
+ - folder and outputFolder arguments added
+
 2019-10-29, Version 0.3.0
 =========================
 

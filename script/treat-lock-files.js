@@ -25,10 +25,22 @@ const yarnLock = require('../lib/treat-fields/yarn.lock');
 
 var argv = require('yargs').argv;
 
-function run(folderPath, outputFolder = folderPath) {
+function run() {
     console.log("Treating fields...");
-    npmLock.run(folderPath, outputFolder);
-    yarnLock.run(folderPath, outputFolder, argv.registry);
+    const folderPath = argv.folder === undefined ? '.' : argv.folder;
+    const outputFolderPath = argv.outputFolder === undefined ? folderPath : argv.outputFolder;
+    _checkOutputFolderExistance(outputFolderPath);
+
+    npmLock.run(folderPath, outputFolderPath);
+    yarnLock.run(folderPath, outputFolderPath, argv.registry);
+}
+
+function _checkOutputFolderExistance(outputFolderPath) {
+    var fs = require('fs');
+    if (!fs.existsSync(outputFolderPath)) {
+        console.log(`${outputFolderPath} folder does not exist. Creating it`);
+        fs.mkdirSync(outputFolderPath);
+    }
 }
 
 module.exports.run = run;

@@ -21,4 +21,4 @@
 'use strict';
 
 const treatLockFiles = require('../script/treat-lock-files');
-treatLockFiles.run('.');
+treatLockFiles.run();

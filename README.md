@@ -12,6 +12,8 @@ Install from npmjs.org:
  * `locktt`
    * Runs the lock treatment tool
    * `--registry` sets the registry to replace the host from yarn.lock resolved field
+   * `--folder` sets the project folder
+   * `--outputFolder` sets the project folder
 
 ### locktt
 
