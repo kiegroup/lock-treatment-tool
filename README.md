@@ -11,6 +11,7 @@ Install from npmjs.org:
 
  * `locktt`
    * Runs the lock treatment tool
+   * `--registry` sets the registry to replace the host from yarn.lock resolved field
 
 ### locktt
 
@@ -33,6 +34,67 @@ Typical usage, if you want to remove the fields:
 
   locktt
 
+```
+
+## `frontend-maven-plugin` example
+
+```
+<plugin>
+  <groupId>com.github.eirslett</groupId>
+  <artifactId>frontend-maven-plugin</artifactId>
+  <executions>
+      <execution>
+          <id>install node and npm</id>
+          <phase>initialize</phase>
+          <goals>
+              <goal>install-node-and-npm</goal>
+          </goals>
+          <configuration>
+              <nodeVersion>${node.version}</nodeVersion>
+              <npmVersion>${npm.version}</npmVersion>
+          </configuration>
+      </execution>
+      <execution>
+          <id>npm install lock-treatment-tool and run-node</id>
+          <phase>initialize</phase>
+          <goals>
+              <goal>npm</goal>
+          </goals>
+          <configuration>
+              <arguments>install lock-treatment-tool --global-style --no-package-lock</arguments>
+          </configuration>
+      </execution>
+      <execution>
+          <id>lock-treatment-tool execution</id>
+          <phase>initialize</phase>
+          <goals>
+              <goal>npm</goal>
+          </goals>
+          <configuration>
+              <arguments>run env -- locktt</arguments>
+          </configuration>
+      </execution>
+      <execution>
+          <id>lock-treatment-tool execution</id>
+          <phase>initialize</phase>
+          <goals>
+              <goal>npm</goal>
+          </goals>
+          <configuration>
+              <arguments>run env -- locktt</arguments>
+          </configuration>
+      </execution>
+      <execution>
+          <id>yarn install</id>
+          <goals>
+              <goal>yarn</goal>
+          </goals>
+          <configuration>
+              <arguments>install</arguments>
+          </configuration>
+      </execution>                            
+  </executions>
+</plugin>
 ```
 
 #### copyright

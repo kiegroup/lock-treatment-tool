@@ -22,18 +22,13 @@
 
 const npmLock = require('../lib/treat-fields/npm.lock');
 const yarnLock = require('../lib/treat-fields/yarn.lock');
-const program = require('commander');
-program
-.option('--registry <value>', 'set the npm registry, specially for yarn')
-.option('--https-proxy <value>', 'set the https-proxy')
-.option('--proxy <value>', 'set the proxy');
-program.parse(process.argv);
-console.log(program.opts());
+
+var argv = require('yargs').argv;
 
 function run(folderPath, outputFolder = folderPath) {
     console.log("Treating fields...");
     npmLock.run(folderPath, outputFolder);
-    yarnLock.run(folderPath, outputFolder, program.registry);
+    yarnLock.run(folderPath, outputFolder, argv.registry);
 }
 
 module.exports.run = run;

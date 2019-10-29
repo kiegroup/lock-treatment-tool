@@ -1,3 +1,8 @@
+2019-10-29, Version 0.3.0
+=========================
+
+ - commander library replaced by yargs due to commander can't handle not defined arguments
+
 2019-10-28, Version 0.2.0
 =========================
 
