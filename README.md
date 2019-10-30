@@ -63,7 +63,7 @@ Typical usage, if you want to remove the fields:
               <goal>npm</goal>
           </goals>
           <configuration>
-              <arguments>install lock-treatment-tool --global-style --no-package-lock</arguments>
+              <arguments>install lock-treatment-tool --global-style --no-package-lock --no-save</arguments>
           </configuration>
       </execution>
       <execution>
