@@ -15,7 +15,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-'use strict';
 
 const treatLockFiles = require('./script/treat-lock-files');
+
 treatLockFiles.run();

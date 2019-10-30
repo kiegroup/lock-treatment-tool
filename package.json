@@ -1,5 +1,5 @@
 {
-  "name": "lock-treatment-tool",
+  "name": "lock-treatment-tool2",
   "version": "0.3.2",
   "description": "Npm (package-lock-json, npm-shrinkwrap.json) and Yarn lock files treatment tool",
   "main": "index.js",
@@ -22,6 +22,10 @@
     "url": "https://github.com/ginxo/lock-treatment-tool/issues"
   },
   "homepage": "https://github.com/ginxo/lock-treatment-tool",
+  "scripts": {
+    "test": "node bin/locktt.js test",
+    "lint": "eslint '**/*.js' --ignore-pattern node_modules/"
+  },
   "bin": {
     "locktt": "bin/locktt.js"
   },
@@ -31,5 +35,10 @@
   "dependencies": {
     "line-reader": "^0.3.0",
     "yargs": "^14.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
   }
 }

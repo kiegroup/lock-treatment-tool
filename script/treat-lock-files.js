@@ -18,29 +18,26 @@
  * under the License.argv._
  */
 
-'use strict';
-
+const { argv } = require('yargs');
 const npmLock = require('../lib/treat-fields/npm.lock');
 const yarnLock = require('../lib/treat-fields/yarn.lock');
 
-var argv = require('yargs').argv;
-
-function run() {
-    console.log("Treating fields...");
-    const folderPath = argv.folder === undefined ? '.' : argv.folder;
-    const outputFolderPath = argv.outputFolder === undefined ? folderPath : argv.outputFolder;
-    _checkOutputFolderExistance(outputFolderPath);
-
-    npmLock.run(folderPath, outputFolderPath);
-    yarnLock.run(folderPath, outputFolderPath, argv.registry);
+function checkOutputFolderExistance(outputFolderPath) {
+  const fs = require('fs');
+  if (!fs.existsSync(outputFolderPath)) {
+    console.log(`${outputFolderPath} folder does not exist. Creating it`);
+    fs.mkdirSync(outputFolderPath);
+  }
 }
 
-function _checkOutputFolderExistance(outputFolderPath) {
-    var fs = require('fs');
-    if (!fs.existsSync(outputFolderPath)) {
-        console.log(`${outputFolderPath} folder does not exist. Creating it`);
-        fs.mkdirSync(outputFolderPath);
-    }
+function run() {
+  console.log('Treating fields...');
+  const folderPath = argv.folder === undefined ? '.' : argv.folder;
+  const outputFolderPath = argv.outputFolder === undefined ? folderPath : argv.outputFolder;
+  checkOutputFolderExistance(outputFolderPath);
+
+  npmLock.run(folderPath, outputFolderPath);
+  yarnLock.run(folderPath, outputFolderPath, argv.registry);
 }
 
 module.exports.run = run;
