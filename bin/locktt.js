@@ -18,15 +18,6 @@
  * under the License.argv._
  */
 
-const args = process.argv.slice(2);
-const scriptIndex = args.findIndex(
-  (x) => x === 'test',
-);
-const script = scriptIndex === -1 ? args[0] : args[scriptIndex];
+const treatLockFiles = require('../script/treat-lock-files');
 
-if (['test'].includes(script)) {
-  require('../test/test');
-} else {
-  const treatLockFiles = require('../script/treat-lock-files');
-  treatLockFiles.run();
-}
+treatLockFiles();

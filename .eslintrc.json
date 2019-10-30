@@ -1,11 +1,16 @@
 {
+    "plugins": [
+        "jest"
+    ],
     "env": {
         "browser": true,
         "commonjs": true,
         "es6": true
     },
     "extends": [
-        "airbnb-base"
+        "airbnb-base",
+        "plugin:jest/recommended",
+        "plugin:jest/style"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -16,6 +21,11 @@
     },
     "rules": {
         "global-require": 0,
-        "no-console": "off"
+        "no-console": "off",
+        "jest/no-disabled-tests": "warn",
+        "jest/no-focused-tests": "error",
+        "jest/no-identical-title": "error",
+        "jest/prefer-to-have-length": "warn",
+        "jest/valid-expect": "error"
     }
 }

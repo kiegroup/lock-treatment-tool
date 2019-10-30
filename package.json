@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/ginxo/lock-treatment-tool",
   "scripts": {
-    "test": "node bin/locktt.js test",
+    "test": "jest",
     "lint": "eslint '**/*.js' --ignore-pattern node_modules/"
   },
   "bin": {
@@ -39,6 +39,9 @@
   "devDependencies": {
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.0.2",
+    "jest": "^24.9.0",
+    "uuid": "^3.3.3"
   }
 }
