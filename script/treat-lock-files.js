@@ -19,15 +19,18 @@
  */
 
 const { argv } = require('yargs');
-const npmLock = require('../lib/treat-fields/npm.lock');
-const yarnLock = require('../lib/treat-fields/yarn.lock');
+const npmLock = require('../lib/treat-locks/npm.lock');
+const yarnLock = require('../lib/treat-locks/yarn.lock');
+const NpmOptions = require('../lib/treat-locks/npm.options');
 
 function run() {
   console.log('Treating fields...');
   const folderPath = argv.folder === undefined ? '.' : argv.folder;
   const outputFolderPath = argv.outputFolder === undefined ? folderPath : argv.outputFolder;
-
-  npmLock(folderPath, outputFolderPath);
+  const npmOptions = new NpmOptions(argv.registry,
+    argv.replacePackageLockRegistry,
+    argv.skipIntegrity);
+  npmLock(folderPath, outputFolderPath, npmOptions);
   yarnLock(folderPath, outputFolderPath, argv.registry);
 }
 

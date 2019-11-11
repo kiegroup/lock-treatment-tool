@@ -77,16 +77,6 @@ Typical usage, if you want to remove the fields:
           </configuration>
       </execution>
       <execution>
-          <id>lock-treatment-tool execution</id>
-          <phase>initialize</phase>
-          <goals>
-              <goal>npm</goal>
-          </goals>
-          <configuration>
-              <arguments>run env -- locktt</arguments>
-          </configuration>
-      </execution>
-      <execution>
           <id>yarn install</id>
           <goals>
               <goal>yarn</goal>

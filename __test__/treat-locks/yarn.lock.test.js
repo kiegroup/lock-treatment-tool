@@ -15,25 +15,19 @@
 // specific language governing permissions and limitations
 // under the License.argv._
 
-const fs = require('fs');
 const uuidv4 = require('uuid/v4');
-const npmLock = require('../lib/treat-fields/npm.lock');
+const yarnLock = require('../../lib/treat-locks/yarn.lock');
 
-function checkDependencies(dependencies) {
-  return Object.keys(dependencies).find((prop) => {
-    const element = dependencies[prop];
-    return element.dependencies ? checkDependencies(element.dependencies)
-      : !(element.resolved !== undefined || element.integrity !== undefined);
-  }) !== undefined;
-}
-
-test('Verify still working if the file does not exist', () => {
-  expect(npmLock('./test', './test')).toBe(false);
+test('Verify still working if the file yarn.lock does not exist', () => {
+  expect(yarnLock('./test', './test')).toBe(false);
 });
 
-test('Verify package-lock.json', () => {
+test('Verify it does not work when the file yarn.lock exists but registry', () => {
   const uuid = uuidv4();
-  npmLock('./__test__/resources', `./__test__/resources/execution-${uuid}`);
-  const json = JSON.parse(fs.readFileSync(`./__test__/resources/execution-${uuid}/package-lock.json`, 'utf8'));
-  expect(checkDependencies(json.dependencies)).toBe(true);
+  expect(yarnLock('./__test__/resources', `./__test__/resources/execution-${uuid}`)).toBe(false);
+});
+
+test('Verify it works when the file yarn.lock exists', () => {
+  const uuid = uuidv4();
+  expect(yarnLock('./__test__/resources', `./__test__/resources/execution-${uuid}`, 'http://redhat.com/')).toBe(true);
 });

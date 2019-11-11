@@ -62,4 +62,4 @@ typings/
 
 /yarn.lock
 .vscode/
-/test/resources/execution/
+/__test__/resources/execution-*
