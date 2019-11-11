@@ -57,7 +57,7 @@ function run() {
     argv.replacePackageLockRegistry,
     argv.skipIntegrity);
   npmLock(folderPath, outputFolderPath, npmOptions);
-  yarnLock(folderPath, outputFolderPath, argv.registry);
+  yarnLock(folderPath, outputFolderPath, npmOptions);
 }
 
 module.exports = run;

@@ -15,8 +15,21 @@
 // specific language governing permissions and limitations
 // under the License.argv._
 
+const readline = require('line-reader');
 const uuidv4 = require('uuid/v4');
 const yarnLock = require('../../lib/treat-locks/yarn.lock');
+const commonLock = require('../../lib/treat-locks/common.lock');
+const NpmOptions = require('../../lib/treat-locks/npm.options');
+
+function checkLine(line, npmOptions) {
+  if (line.startsWith('  resolved "http')) {
+    return npmOptions.registry === commonLock.getHost(line);
+  }
+  if (line.startsWith('  integrity ') && npmOptions.skipIntegrity === false) {
+    return npmOptions.skipIntegrity === false;
+  }
+  return true;
+}
 
 test('Verify still working if the file yarn.lock does not exist', () => {
   expect(yarnLock('./test', './test')).toBe(false);
@@ -29,5 +42,10 @@ test('Verify it does not work when the file yarn.lock exists but registry', () =
 
 test('Verify it works when the file yarn.lock exists', () => {
   const uuid = uuidv4();
-  expect(yarnLock('./__test__/resources', `./__test__/resources/execution-${uuid}`, 'http://redhat.com/')).toBe(true);
+  const npmOptions = new NpmOptions('http://redhat.com/');
+  expect(yarnLock('./__test__/resources', `./__test__/resources/execution-${uuid}`, npmOptions)).toBe(true);
+  readline.eachLine(`./__test__/resources/execution-${uuid}/yarn.lock`, (line) => {
+    console.log(line);
+    expect(checkLine(line, npmOptions)).toBe(true);
+  });
 });
