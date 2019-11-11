@@ -1,3 +1,9 @@
+2019-11-11, Version 0.4.0
+=========================
+
+ - `replacePackageLockRegistry` option added
+ - `skipIntegrity` option added
+
 2019-10-30, Version 0.3.2
 =========================
 

@@ -9,34 +9,41 @@ Install from npmjs.org:
 
 ## Current commands
 
- * `locktt`
+ * **`locktt`**
    * Runs the lock treatment tool
-   * `--registry` sets the registry to replace the host from yarn.lock resolved field
-   * `--folder` sets the project folder
-   * `--outputFolder` sets the project folder
 
-### locktt
+## locktt
 
-```
-usage: locktt
+**Usage**: `locktt [options]`
 
-What locktt will do:
+**Options**:
+   * `--registry` *sets the registry to replace the host from yarn.lock resolved field*
+   * `-p, --replacePackageLockRegistry` *replaces the package-lock.json the registry instead of removing it*
+   * `-s, --skipIntegrity` *skips integrity removal*
+   * `--folder` *sets the project folder*
+   * `--outputFolder` *sets the output folder to save the lock files*
+
+**Examples**:
+  * `locktt --registry=https://npmregistry.redhat.com`        *sets the registry just for the yarn.lock file*
+  * `locktt --registry=https://npmregistry.redhat.com -p`     *sets the registry for every lock file*
+  * `locktt -s`                                               *skips the integrity field removal*
+
+**What locktt will do**:
  - look for package-lock.json, npm-shrinkwrap.json and yarn.lock files
  - remove the `resolved` and `integrity` fields from the package-lock.json and/or npm-shrinkwrap.json files in case it finds them
  - replace the `resolved` field from yarn.lock file adding the `--registry` value instead of the host and remove the `integrity` field
  - save the file
 
-locktt will abort if:
+**locktt will abort if**:
  - the package-json.lock or npm-shrinkwrap.json file formats are not correct
 
-locktt will NOT abort if:
+**locktt will NOT abort if**:
  - the package-json.lock, npm-shrinkwrap.json or yarn.lock does not exist
 
-Typical usage, if you want to remove the fields:
+**Typical usage, if you want to remove the fields**:
 
   locktt
 
-```
 
 ## `frontend-maven-plugin` example
 

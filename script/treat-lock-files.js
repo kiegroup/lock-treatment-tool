@@ -18,7 +18,33 @@
  * under the License.argv._
  */
 
-const { argv } = require('yargs');
+const { argv } = require('yargs')
+  .usage('Usage: $0 [options]')
+  .boolean(['p', 's'])
+  .alias('r', 'registry')
+  .nargs('r', 1)
+  .describe('r', 'sets the registry to replace the host from yarn.lock resolved field')
+  .example('$0 --registry=https://npmregistry.redhat.com', 'sets the registry just for the yarn.lock file')
+  .alias('p', 'replacePackageLockRegistry')
+  .nargs('p', 0)
+  .describe('p', 'replaces the package-lock.json registry instead of removing it')
+  .example('$0 --registry=https://npmregistry.redhat.com --replacePackageLockRegistry', 'sets the registry just for the yarn.lock file')
+  .alias('s', 'skipIntegrity')
+  .nargs('s', 0)
+  .describe('s', 'skips integrity removal')
+  .example('$0 --skipIntegrity', 'sets the registry just for the yarn.lock file')
+  .alias('f', 'folder')
+  .nargs('f', 1)
+  .describe('f', 'sets the project folder')
+  .example('$0 --folder=/path/to/project', 'treats the lock files from `/path/to/project` folder')
+  .alias('o', 'outputFolder')
+  .nargs('o', 1)
+  .describe('o', 'sets the output folder to save the lock files')
+  .example('$0 --outputFolder=/path/to/output/folder', 'saves the treated lock files to `/path/to/output/folder` folder')
+  .help('h')
+  .alias('h', 'help')
+  .epilog('copyright 2019');
+
 const npmLock = require('../lib/treat-locks/npm.lock');
 const yarnLock = require('../lib/treat-locks/yarn.lock');
 const NpmOptions = require('../lib/treat-locks/npm.options');
