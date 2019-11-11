@@ -24,7 +24,8 @@
   "homepage": "https://github.com/ginxo/lock-treatment-tool",
   "scripts": {
     "test": "jest && rimraf __test__/resources/execution-*",
-    "lint": "eslint '**/*.js' --ignore-pattern node_modules/"
+    "lint": "eslint '**/*.js' --ignore-pattern node_modules/",
+    "prepublish": "npm test"
   },
   "husky": {
     "hooks": {
