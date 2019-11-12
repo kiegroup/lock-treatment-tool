@@ -96,6 +96,13 @@ Install from npmjs.org:
 </plugin>
 ```
 
+### Restrictions
+
+* Version **>=0.4.1**:
+  * *NodeJS* >= 7.6.0
+* Version **<=0.4.0**:
+  * *NodeJS* >= 5.0.0
+
 #### copyright
 
 Looks at all the .js files in the current git repo and adds/updates a
