@@ -1,3 +1,9 @@
+2019-11-12, Version 0.4.0
+=========================
+
+ - yarn.lock.js synchronous
+ - nodejs required version increased to 7.6.0
+
 2019-11-11, Version 0.4.0
 =========================
 

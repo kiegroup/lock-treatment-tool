@@ -15,8 +15,8 @@
 // specific language governing permissions and limitations
 // under the License.argv._
 
-const readline = require('line-reader');
 const uuidv4 = require('uuid/v4');
+const fileUtil = require('../../lib/utils/file.util');
 const yarnLock = require('../../lib/treat-locks/yarn.lock');
 const commonLock = require('../../lib/treat-locks/common.lock');
 const NpmOptions = require('../../lib/treat-locks/npm.options');
@@ -31,21 +31,21 @@ function checkLine(line, npmOptions) {
   return true;
 }
 
-test('Verify still working if the file yarn.lock does not exist', () => {
-  expect(yarnLock('./test', './test')).toBe(false);
+test('Verify still working if the file yarn.lock does not exist', async () => {
+  await expect(yarnLock('./test', './test')).resolves.toBe(false);
 });
 
-test('Verify it does not work when the file yarn.lock exists but registry', () => {
+test('Verify it does not work when the file yarn.lock exists but registry', async () => {
   const uuid = uuidv4();
-  expect(yarnLock('./__test__/resources', `./__test__/resources/execution-${uuid}`)).toBe(false);
+  await expect(yarnLock('./__test__/resources', `./__test__/resources/execution-${uuid}`)).resolves.toBe(false);
 });
 
-test('Verify it works when the file yarn.lock exists', () => {
+test('Verify it works when the file yarn.lock exists', async () => {
   const uuid = uuidv4();
   const npmOptions = new NpmOptions('http://redhat.com/');
-  expect(yarnLock('./__test__/resources', `./__test__/resources/execution-${uuid}`, npmOptions)).toBe(true);
-  readline.eachLine(`./__test__/resources/execution-${uuid}/yarn.lock`, (line) => {
-    console.log(line);
+  await expect(yarnLock('./__test__/resources', `./__test__/resources/execution-${uuid}`, npmOptions)).resolves.toBe(true);
+
+  await expect(fileUtil.readLineSync(`./__test__/resources/execution-${uuid}/yarn.lock`, async (line) => {
     expect(checkLine(line, npmOptions)).toBe(true);
-  });
+  })).resolves.toBeUndefined();
 });
