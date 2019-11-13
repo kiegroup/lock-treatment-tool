@@ -1,6 +1,6 @@
 {
     "plugins": [
-        "jest"
+        "jest", "header"
     ],
     "env": {
         "browser": true,
@@ -21,6 +21,7 @@
     },
     "rules": {
         "global-require": 0,
+        "header/header": [2, "config/header.js"],
         "no-console": "off",
         "jest/no-disabled-tests": "warn",
         "jest/no-focused-tests": "error",
