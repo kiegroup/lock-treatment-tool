@@ -1,7 +1,7 @@
 lock-treatment-tool
 ============
 
-Helpers for treating npm lock files
+Helpers for treating npm lock files, like removing/replacing the registry from there...
 
 Install from npmjs.org:
 
@@ -18,25 +18,25 @@ or run using `npx`
 
 ## locktt
 
+**What locktt will do**:
+ - looks for package-lock.json, npm-shrinkwrap.json and yarn.lock files
+ - removes the `resolved` and `integrity` fields from the package-lock.json and/or npm-shrinkwrap.json files in case it finds them
+ - replaces the `resolved` field from yarn.lock file adding the `--registry` value instead of the host and remove the `integrity` field
+ - overwrites/saves the file
+
 **Usage**: `locktt [options]`
 
 **Options**:
-   * `--registry` *sets the registry to replace the host from yarn.lock resolved field*
+   * `--registry` *sets the registry to replace the host from lock files' `resolved` field*
    * `-p, --replacePackageLockRegistry` *replaces the package-lock.json the registry instead of removing it*
    * `-s, --skipIntegrity` *skips integrity removal*
-   * `--folder` *sets the project folder*
-   * `--outputFolder` *sets the output folder to save the lock files*
+   * `--folder` *sets the project folder to be treated*
+   * `--outputFolder` *sets the output folder to save the lock files, otherwise will use the project folder and the files will be overwritten*
 
 **Examples**:
   * `locktt --registry=https://npmregistry.redhat.com`        *sets the registry just for the yarn.lock file*
   * `locktt --registry=https://npmregistry.redhat.com -p`     *sets the registry for every lock file*
   * `locktt -s`                                               *skips the integrity field removal*
-
-**What locktt will do**:
- - look for package-lock.json, npm-shrinkwrap.json and yarn.lock files
- - remove the `resolved` and `integrity` fields from the package-lock.json and/or npm-shrinkwrap.json files in case it finds them
- - replace the `resolved` field from yarn.lock file adding the `--registry` value instead of the host and remove the `integrity` field
- - save the file
 
 **locktt will abort if**:
  - the package-json.lock or npm-shrinkwrap.json file formats are not correct
