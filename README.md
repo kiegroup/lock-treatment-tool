@@ -5,11 +5,14 @@ Helpers for treating npm lock files, like removing/replacing the registry from t
 
 Install from npmjs.org:
 
-    npm install -g lock-treatment-tool
+    npm install -g @kie/lock-treatment-tool
 
 or run using `npx`
 
-    npx -p lock-treatment-tool locktt
+    npx -p @kie/lock-treatment-tool locktt
+
+> **_Note:_** In case you are behind a proxy or you need to use and internal registry just add `@kie:registry=YOUR_NPM_REGISTRY_URL` (replace `YOUR_NPM_REGISTRY_URL` by yours) or even `@kie:registry=${NPM_REGISTRY_URL}` (being `NPM_REGISTRY_URL` the environment variable pointing to your npm registry, you can use any other variable name)
+
 
 ## Current commands
 
@@ -68,37 +71,20 @@ or run using `npx`
           </configuration>
       </execution>
       <execution>
-          <id>npm install lock-treatment-tool and run-node</id>
-          <phase>initialize</phase>
-          <goals>
-              <goal>npm</goal>
-          </goals>
-          <configuration>
-              <arguments>install lock-treatment-tool --global-style --no-package-lock --no-save</arguments>
-          </configuration>
-      </execution>
-      <execution>
           <id>lock-treatment-tool execution</id>
           <phase>initialize</phase>
           <goals>
-              <goal>npm</goal>
+              <goal>npx</goal>
           </goals>
           <configuration>
-              <arguments>run env -- locktt</arguments>
+              <arguments>@kie/lock-treatment-tool --</arguments>
           </configuration>
       </execution>
-      <execution>
-          <id>yarn install</id>
-          <goals>
-              <goal>yarn</goal>
-          </goals>
-          <configuration>
-              <arguments>install</arguments>
-          </configuration>
-      </execution>                            
   </executions>
 </plugin>
 ```
+
+> **_Note:_** In case you are behind a proxy or you need to use and internal registry just add `@kie:registry=YOUR_NPM_REGISTRY_URL` (replace `YOUR_NPM_REGISTRY_URL` by yours) or even `@kie:registry=${NPM_REGISTRY_URL}` (being `NPM_REGISTRY_URL` the environment variable pointing to your npm registry, you can use any other variable name)
 
 ### Restrictions
 
