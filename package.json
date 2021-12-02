@@ -1,11 +1,11 @@
 {
-  "name": "lock-treatment-tool",
-  "version": "0.4.2",
+  "name": "@kie/lock-treatment-tool",
+  "version": "0.0.1",
   "description": "Npm (package-lock-json, npm-shrinkwrap.json) and Yarn lock files treatment tool",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:ginxo/lock-treatment-tool"
+    "url": "git@github.com:kiegroup/lock-treatment-tool"
   },
   "keywords": [
     "yarn.lock",
@@ -16,12 +16,13 @@
     "modify",
     "registry"
   ],
-  "author": "Enrique Mingorance <emingora@redhat.com>",
+  "author": "Enrique Mingorance Cano <emingora@redhat.com>",
   "license": "Apache-2.0",
+  "private": false,
   "bugs": {
-    "url": "https://github.com/ginxo/lock-treatment-tool/issues"
+    "url": "https://github.com/kiegroup/lock-treatment-tool/issues"
   },
-  "homepage": "https://github.com/ginxo/lock-treatment-tool",
+  "homepage": "https://github.com/kiegroup/lock-treatment-tool",
   "scripts": {
     "test": "jest && rimraf '__test__/resources/**/execution-*'",
     "lint": "eslint '**/*.js' --ignore-pattern node_modules/",
