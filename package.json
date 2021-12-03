@@ -1,6 +1,6 @@
 {
   "name": "@kie/lock-treatment-tool",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Npm (package-lock-json, npm-shrinkwrap.json) and Yarn lock files treatment tool",
   "main": "index.js",
   "repository": {
@@ -31,7 +31,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test && npm shrinkwrap && git add npm-shrinkwrap.json",
+      "pre-commit": "npm run lint && npm test && npm shrinkwrap && git add npm-shrinkwrap.json",
       "pre-push": "npm test"
     }
   },
