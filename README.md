@@ -12,7 +12,7 @@ or run using `npx` or `exec`
     `npm exec @kie/lock-treatment-tool`
     `npx @kie/lock-treatment-tool`
 
-> **_Note:_** In case you are behind a proxy or you need to use and internal registry please check [The `--registry` problem](#the-registry-problem)
+> **_Note:_** In case you are behind a proxy or you need to use and internal registry please check [The `--registry` problem](#the---registry-problem)
 
 
 ## Current commands
@@ -95,7 +95,7 @@ We are glad to tell you this problems dissapears since locktt version >0.0.1, we
 </plugin>
 ```
 
-> **_Note:_** In case you are behind a proxy or you need to use and internal registry please check [The `--registry` problem](#the-registry-problem)
+> **_Note:_** In case you are behind a proxy or you need to use and internal registry please check [The `--registry` problem](#the---registry-problem)
 
 ### Restrictions
 
