@@ -65,5 +65,4 @@ typings/
 /__test__/resources/execution-*
 package-lock.json
 
-!.husky/_/.gitkeep
 .husky
