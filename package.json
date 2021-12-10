@@ -28,13 +28,9 @@
     "test": "jest && rimraf '__test__/resources/**/execution-*'",
     "lint": "eslint '**/*.js' --ignore-pattern node_modules/",
     "lint:fix": "eslint '**/*.js' --ignore-pattern node_modules/ --fix",
+    "hook-pre-commit": "npm run lint && npm test && npm shrinkwrap && git add npm-shrinkwrap.json",
+    "hook-pre-push": "npm run lint && npm test && npm shrinkwrap && git add npm-shrinkwrap.json",
     "prepublish": "npm test"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint && npm test && npm shrinkwrap && git add npm-shrinkwrap.json",
-      "pre-push": "npm test"
-    }
   },
   "bin": {
     "locktt": "bin/locktt.js"
