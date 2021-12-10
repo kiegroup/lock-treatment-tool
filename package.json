@@ -1,6 +1,6 @@
 {
   "name": "@kie/lock-treatment-tool",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Npm (package-lock-json, npm-shrinkwrap.json) and Yarn lock files treatment tool",
   "main": "index.js",
   "repository": {
@@ -24,16 +24,11 @@
   },
   "homepage": "https://github.com/kiegroup/lock-treatment-tool",
   "scripts": {
+    "prepare": "husky install",
     "test": "jest && rimraf '__test__/resources/**/execution-*'",
     "lint": "eslint '**/*.js' --ignore-pattern node_modules/",
     "lint:fix": "eslint '**/*.js' --ignore-pattern node_modules/ --fix",
     "prepublish": "npm test"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint && npm test && npm shrinkwrap && git add npm-shrinkwrap.json",
-      "pre-push": "npm test"
-    }
   },
   "bin": {
     "locktt": "bin/locktt.js"
@@ -51,7 +46,7 @@
     "eslint-plugin-header": "^3.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^23.0.2",
-    "husky": "^3.0.9",
+    "husky": "^7.0.4",
     "jest": "^24.9.0",
     "rimraf": "^3.0.0",
     "uuid": "^3.3.3"
