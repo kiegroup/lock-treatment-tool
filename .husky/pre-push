@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run hook-pre-push
+npm run lint && npm test && npm shrinkwrap && git add npm-shrinkwrap.json
