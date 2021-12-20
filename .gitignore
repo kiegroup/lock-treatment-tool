@@ -61,6 +61,7 @@ typings/
 .next
 
 /yarn.lock
+.idea/
 .vscode/
 /__test__/resources/execution-*
 package-lock.json
