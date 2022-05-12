@@ -1,6 +1,20 @@
 name: Node CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths: 
+      - '.github/**'
+      - 'bin/**'
+      - 'test/**'
+      - 'script/**'
+      - 'lib/**'
+      - 'config/**'
+      - 'package.json'
+      - 'yarn.lock'
+      - 'npm-shrinkwrap.json'
 
 jobs:
   build:
