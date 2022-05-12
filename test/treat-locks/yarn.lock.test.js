@@ -37,15 +37,15 @@ test('Verify still working if the file yarn.lock does not exist', async () => {
 
 test('Verify it does not work when the file yarn.lock exists but registry', async () => {
   const uuid = uuidv4();
-  await expect(yarnLock('./__test__/resources', `./__test__/resources/execution-${uuid}`)).resolves.toBe(false);
+  await expect(yarnLock('./test/resources', `./test/resources/execution-${uuid}`)).resolves.toBe(false);
 });
 
 test('Verify it works when the file yarn.lock exists', async () => {
   const uuid = uuidv4();
   const npmOptions = new NpmOptions('http://redhat.com/');
-  await expect(yarnLock('./__test__/resources', `./__test__/resources/execution-${uuid}`, npmOptions)).resolves.toBe(true);
+  await expect(yarnLock('./test/resources', `./test/resources/execution-${uuid}`, npmOptions)).resolves.toBe(true);
 
-  await expect(fileUtil.readLineSync(`./__test__/resources/execution-${uuid}/yarn.lock`, async (line) => {
+  await expect(fileUtil.readLineSync(`./test/resources/execution-${uuid}/yarn.lock`, async (line) => {
     expect(checkLine(line, npmOptions)).toBe(true);
   })).resolves.toBeUndefined();
 });

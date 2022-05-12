@@ -48,31 +48,28 @@ test('Verify still working if the file package-lock.json does not exist', () => 
 
 test('Verify it works when the file package-lock.json exists', () => {
   const uuid = uuidv4();
-  expect(npmLock('./__test__/resources/npmv7', `./__test__/resources/npmv7/execution-${uuid}`)).toBe(true);
+  expect(npmLock('./test/resources', `./test/resources/execution-${uuid}`)).toBe(true);
 });
 
 test('Verify package-lock.json', () => {
   const uuid = uuidv4();
-  npmLock('./__test__/resources/npmv7', `./__test__/resources/npmv7/execution-${uuid}`);
-  const json = JSON.parse(fs.readFileSync(`./__test__/resources/npmv7/execution-${uuid}/package-lock.json`, 'utf8'));
+  npmLock('./test/resources', `./test/resources/execution-${uuid}`);
+  const json = JSON.parse(fs.readFileSync(`./test/resources/execution-${uuid}/package-lock.json`, 'utf8'));
   expect(checkDependencies(json.dependencies, undefined)).toBe(true);
-  expect(checkDependencies(json.packages, undefined)).toBe(true);
 });
 
 test('Verify registry replacement', () => {
   const uuid = uuidv4();
   const npmOptions = new NpmOptions('http://redhat.com', true);
-  npmLock('./__test__/resources/npmv7', `./__test__/resources/npmv7/execution-${uuid}`, npmOptions);
-  const json = JSON.parse(fs.readFileSync(`./__test__/resources/npmv7/execution-${uuid}/package-lock.json`, 'utf8'));
+  npmLock('./test/resources', `./test/resources/execution-${uuid}`, npmOptions);
+  const json = JSON.parse(fs.readFileSync(`./test/resources/execution-${uuid}/package-lock.json`, 'utf8'));
   expect(checkDependencies(json.dependencies, npmOptions)).toBe(true);
-  expect(checkDependencies(json.packages, npmOptions)).toBe(true);
 });
 
 test('Verify skipRegistry', () => {
   const uuid = uuidv4();
   const npmOptions = new NpmOptions(undefined, false, true);
-  npmLock('./__test__/resources/npmv7', `./__test__/resources/npmv7/execution-${uuid}`, npmOptions);
-  const json = JSON.parse(fs.readFileSync(`./__test__/resources/npmv7/execution-${uuid}/package-lock.json`, 'utf8'));
+  npmLock('./test/resources', `./test/resources/execution-${uuid}`, npmOptions);
+  const json = JSON.parse(fs.readFileSync(`./test/resources/execution-${uuid}/package-lock.json`, 'utf8'));
   expect(checkDependencies(json.dependencies, npmOptions)).toBe(true);
-  expect(checkDependencies(json.packages, npmOptions)).toBe(true);
 });
