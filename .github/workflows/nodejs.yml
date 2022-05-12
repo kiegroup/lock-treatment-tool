@@ -1,11 +1,10 @@
 name: Node CI
 
 on:
-  push:
+  pull_request:
     branches:
       - main
-  pull_request:
-    paths: 
+    paths-ignore:
       - '.github/**'
       - 'bin/**'
       - 'test/**'
@@ -15,12 +14,6 @@ on:
       - 'package.json'
       - 'yarn.lock'
       - 'npm-shrinkwrap.json'
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
 
 jobs:
   build:
