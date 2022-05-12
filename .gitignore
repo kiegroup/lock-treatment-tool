@@ -63,5 +63,5 @@ typings/
 /yarn.lock
 .idea/
 .vscode/
-/__test__/resources/execution-*
-package-lock.json
+/test/resources/execution-*
+/package-lock.json
