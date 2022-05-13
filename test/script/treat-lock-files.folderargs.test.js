@@ -21,6 +21,10 @@ jest.mock('../../lib/treat-locks/npm.lock');
 jest.mock('../../lib/treat-locks/yarn.lock');
 jest.mock('../../lib/treat-locks/npm.options');
 
+jest.spyOn(console, 'log').mockImplementation(() => {});
+jest.spyOn(console, 'warn').mockImplementation(() => {});
+jest.spyOn(console, 'info').mockImplementation(() => {});
+
 const npmLockMock = require('../../lib/treat-locks/npm.lock');
 const yarnLockMock = require('../../lib/treat-locks/yarn.lock');
 const NpmOptionsMock = require('../../lib/treat-locks/npm.options');
@@ -38,8 +42,13 @@ beforeEach(() => {
 });
 
 it('Run with folder', () => {
+  // Arrange
   const treatLockFiles = require('../../script/treat-lock-files');
+
+  // Act
   treatLockFiles();
+
+  // Assert
   expect(NpmOptionsMock).toHaveBeenCalledWith(undefined, undefined, undefined);
   expect(npmLockMock).toHaveBeenCalledWith('./path', './path', expect.any(NpmOptionsMock));
   expect(yarnLockMock).toHaveBeenCalledWith('./path', './path', expect.any(NpmOptionsMock));

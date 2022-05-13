@@ -1,6 +1,6 @@
 {
   "name": "@kie/lock-treatment-tool",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Npm (package-lock-json, npm-shrinkwrap.json) and Yarn lock files treatment tool",
   "main": "index.js",
   "repository": {
@@ -34,7 +34,7 @@
     "locktt": "bin/locktt.js"
   },
   "engines": {
-    "node": ">=7.6.0"
+    "node": "^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0"
   },
   "dependencies": {
     "line-reader": "^0.4.0",

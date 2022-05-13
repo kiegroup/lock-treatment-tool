@@ -16,14 +16,20 @@
 // under the License.argv._
 
 const fs = require('fs');
-const uuidv4 = require('uuid/v4');
+const { v4: uuidv4 } = require('uuid');
 const npmLock = require('../../lib/treat-locks/npm.lock');
 const commonLock = require('../../lib/treat-locks/common.lock');
 const NpmOptions = require('../../lib/treat-locks/npm.options');
 
+jest.spyOn(console, 'log').mockImplementation(() => {});
+jest.spyOn(console, 'warn').mockImplementation(() => {});
+jest.spyOn(console, 'info').mockImplementation(() => {});
+
 function isDependencyOk(dependency, npmOptions = new NpmOptions()) {
   const resolvedCheck = npmOptions.replacePackageLockRegistry === true
-    ? dependency.resolved !== undefined && dependency.resolved !== `${npmOptions.registry}${commonLock.getHost(dependency.resolved)}`
+    ? dependency.resolved !== undefined
+        && dependency.resolved
+          !== `${npmOptions.registry}${commonLock.getHost(dependency.resolved)}`
     : dependency.resolved === undefined;
 
   const integrityCheck = npmOptions.skipIntegrity === false
@@ -34,42 +40,94 @@ function isDependencyOk(dependency, npmOptions = new NpmOptions()) {
 }
 
 function checkDependencies(dependencies, npmOptions) {
-  return Object.keys(dependencies).find((prop) => {
-    const dependency = dependencies[prop];
-    return dependency.dependencies
-      ? checkDependencies(dependency.dependencies)
-      : isDependencyOk(dependency, npmOptions);
-  }) !== undefined;
+  return (
+    Object.keys(dependencies).find((prop) => {
+      const dependency = dependencies[prop];
+      return dependency.dependencies
+        ? checkDependencies(dependency.dependencies)
+        : isDependencyOk(dependency, npmOptions);
+    }) !== undefined
+  );
 }
 
 test('Verify still working if the file package-lock.json does not exist', () => {
+  // Act
   expect(npmLock('./test', './test')).toBe(false);
 });
 
 test('Verify it works when the file package-lock.json exists', () => {
+  // Arrange
   const uuid = uuidv4();
-  expect(npmLock('./test/resources', `./test/resources/execution-${uuid}`)).toBe(true);
+
+  // Act
+  expect(
+    npmLock('./test/resources', `./test/resources/execution-${uuid}`),
+  ).toBe(true);
 });
 
 test('Verify package-lock.json', () => {
+  // Arrange
   const uuid = uuidv4();
+
+  // Act
   npmLock('./test/resources', `./test/resources/execution-${uuid}`);
-  const json = JSON.parse(fs.readFileSync(`./test/resources/execution-${uuid}/package-lock.json`, 'utf8'));
+
+  // Assert
+  expect(
+    fs.existsSync(`./test/resources/execution-${uuid}/package-lock.json`),
+  ).toBe(true);
+  const json = JSON.parse(
+    fs.readFileSync(
+      `./test/resources/execution-${uuid}/package-lock.json`,
+      'utf8',
+    ),
+  );
+
+  // Assert
+  expect(
+    fs.existsSync(`./test/resources/execution-${uuid}/package-lock.json`),
+  ).toBe(true);
   expect(checkDependencies(json.dependencies, undefined)).toBe(true);
 });
 
 test('Verify registry replacement', () => {
+  // Arrange
   const uuid = uuidv4();
   const npmOptions = new NpmOptions('http://redhat.com', true);
+
+  // Act
   npmLock('./test/resources', `./test/resources/execution-${uuid}`, npmOptions);
-  const json = JSON.parse(fs.readFileSync(`./test/resources/execution-${uuid}/package-lock.json`, 'utf8'));
+
+  // Assert
+  expect(
+    fs.existsSync(`./test/resources/execution-${uuid}/package-lock.json`),
+  ).toBe(true);
+  const json = JSON.parse(
+    fs.readFileSync(
+      `./test/resources/execution-${uuid}/package-lock.json`,
+      'utf8',
+    ),
+  );
   expect(checkDependencies(json.dependencies, npmOptions)).toBe(true);
 });
 
 test('Verify skipRegistry', () => {
+  // Arrange
   const uuid = uuidv4();
   const npmOptions = new NpmOptions(undefined, false, true);
+
+  // Act
   npmLock('./test/resources', `./test/resources/execution-${uuid}`, npmOptions);
-  const json = JSON.parse(fs.readFileSync(`./test/resources/execution-${uuid}/package-lock.json`, 'utf8'));
+
+  // Assert
+  expect(
+    fs.existsSync(`./test/resources/execution-${uuid}/package-lock.json`),
+  ).toBe(true);
+  const json = JSON.parse(
+    fs.readFileSync(
+      `./test/resources/execution-${uuid}/package-lock.json`,
+      'utf8',
+    ),
+  );
   expect(checkDependencies(json.dependencies, npmOptions)).toBe(true);
 });

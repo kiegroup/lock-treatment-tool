@@ -19,6 +19,10 @@ process.argv.push('--registry', 'registry1');
 process.argv.push('--replacePackageLockRegistry');
 process.argv.push('--skipIntegrity');
 
+jest.spyOn(console, 'log').mockImplementation(() => {});
+jest.spyOn(console, 'warn').mockImplementation(() => {});
+jest.spyOn(console, 'info').mockImplementation(() => {});
+
 jest.mock('../../lib/treat-locks/npm.lock');
 jest.mock('../../lib/treat-locks/yarn.lock');
 jest.mock('../../lib/treat-locks/npm.options');
@@ -40,9 +44,22 @@ beforeEach(() => {
 });
 
 it('Run with folder', () => {
+  // Arrange
   const treatLockFiles = require('../../script/treat-lock-files');
+
+  // Act
   treatLockFiles();
+
+  // Assert
   expect(NpmOptionsMock).toHaveBeenCalledWith('registry1', true, true);
-  expect(npmLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
-  expect(yarnLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
+  expect(npmLockMock).toHaveBeenCalledWith(
+    '.',
+    '.',
+    expect.any(NpmOptionsMock),
+  );
+  expect(yarnLockMock).toHaveBeenCalledWith(
+    '.',
+    '.',
+    expect.any(NpmOptionsMock),
+  );
 });
