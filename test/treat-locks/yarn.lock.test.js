@@ -15,15 +15,15 @@
 // specific language governing permissions and limitations
 // under the License.argv._
 
-const uuidv4 = require('uuid/v4');
+const { v4: uuidv4 } = require('uuid');
 const fileUtil = require('../../lib/utils/file.util');
 const yarnLock = require('../../lib/treat-locks/yarn.lock');
 const commonLock = require('../../lib/treat-locks/common.lock');
 const NpmOptions = require('../../lib/treat-locks/npm.options');
 
-jest.spyOn(console, "log").mockImplementation(() => {});
-jest.spyOn(console, "warn").mockImplementation(() => {});
-jest.spyOn(console, "info").mockImplementation(() => {});
+jest.spyOn(console, 'log').mockImplementation(() => {});
+jest.spyOn(console, 'warn').mockImplementation(() => {});
+jest.spyOn(console, 'info').mockImplementation(() => {});
 
 function checkLine(line, npmOptions) {
   if (line.startsWith('  resolved "http')) {
@@ -52,7 +52,7 @@ test('Verify it works when the file yarn.lock exists', async () => {
   // Arrange
   const uuid = uuidv4();
   const npmOptions = new NpmOptions('http://redhat.com/');
-  
+
   // Act && Assert
   await expect(yarnLock('./test/resources', `./test/resources/execution-${uuid}`, npmOptions)).resolves.toBe(true);
 

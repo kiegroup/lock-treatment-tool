@@ -16,14 +16,14 @@
 // under the License.argv._
 
 const fs = require('fs');
-const uuidv4 = require('uuid/v4');
+const { v4: uuidv4 } = require('uuid');
 const npmLock = require('../../lib/treat-locks/npm.lock');
 const commonLock = require('../../lib/treat-locks/common.lock');
 const NpmOptions = require('../../lib/treat-locks/npm.options');
 
-jest.spyOn(console, "log").mockImplementation(() => {});
-jest.spyOn(console, "warn").mockImplementation(() => {});
-jest.spyOn(console, "info").mockImplementation(() => {});
+jest.spyOn(console, 'log').mockImplementation(() => {});
+jest.spyOn(console, 'warn').mockImplementation(() => {});
+jest.spyOn(console, 'info').mockImplementation(() => {});
 
 function isDependencyOk(dependency, npmOptions = new NpmOptions()) {
   const resolvedCheck = npmOptions.replacePackageLockRegistry === true

@@ -21,9 +21,9 @@ jest.mock('../../lib/treat-locks/npm.lock');
 jest.mock('../../lib/treat-locks/yarn.lock');
 jest.mock('../../lib/treat-locks/npm.options');
 
-jest.spyOn(console, "log").mockImplementation(() => {});
-jest.spyOn(console, "warn").mockImplementation(() => {});
-jest.spyOn(console, "info").mockImplementation(() => {});
+jest.spyOn(console, 'log').mockImplementation(() => {});
+jest.spyOn(console, 'warn').mockImplementation(() => {});
+jest.spyOn(console, 'info').mockImplementation(() => {});
 
 const npmLockMock = require('../../lib/treat-locks/npm.lock');
 const yarnLockMock = require('../../lib/treat-locks/yarn.lock');

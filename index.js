@@ -15,7 +15,6 @@
 // specific language governing permissions and limitations
 // under the License.argv._
 
-
 const treatLockFiles = require('./script/treat-lock-files');
 
 treatLockFiles();

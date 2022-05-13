@@ -15,13 +15,13 @@
 // specific language governing permissions and limitations
 // under the License.argv._
 
-jest.mock("../../lib/treat-locks/npm.lock");
-jest.mock("../../lib/treat-locks/yarn.lock");
-jest.mock("../../lib/treat-locks/npm.options");
+jest.mock('../../lib/treat-locks/npm.lock');
+jest.mock('../../lib/treat-locks/yarn.lock');
+jest.mock('../../lib/treat-locks/npm.options');
 
-const npmLockMock = require("../../lib/treat-locks/npm.lock");
-const yarnLockMock = require("../../lib/treat-locks/yarn.lock");
-const NpmOptionsMock = require("../../lib/treat-locks/npm.options");
+const npmLockMock = require('../../lib/treat-locks/npm.lock');
+const yarnLockMock = require('../../lib/treat-locks/yarn.lock');
+const NpmOptionsMock = require('../../lib/treat-locks/npm.options');
 
 const spy = jest.fn();
 
@@ -37,15 +37,15 @@ global.console = {
   error: jest.fn(),
 };
 
-describe("treat-lock-files no args", () => {
+describe('treat-lock-files no args', () => {
   beforeEach(() => {
     process.argv = [];
     NpmOptionsMock.mockClear();
   });
 
-  test("Run without args", () => {
+  test('Run without args', () => {
     // Arrange
-    const treatLockFiles = require("../../script/treat-lock-files");
+    const treatLockFiles = require('../../script/treat-lock-files');
 
     // Act
     treatLockFiles();
@@ -57,17 +57,17 @@ describe("treat-lock-files no args", () => {
     expect(NpmOptionsMock).toHaveBeenCalledWith(
       undefined,
       undefined,
-      undefined
+      undefined,
     );
     expect(npmLockMock).toHaveBeenCalledWith(
-      ".",
-      ".",
-      expect.any(NpmOptionsMock)
+      '.',
+      '.',
+      expect.any(NpmOptionsMock),
     );
     expect(yarnLockMock).toHaveBeenCalledWith(
-      ".",
-      ".",
-      expect.any(NpmOptionsMock)
+      '.',
+      '.',
+      expect.any(NpmOptionsMock),
     );
   });
 });
