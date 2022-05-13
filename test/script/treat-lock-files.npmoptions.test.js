@@ -15,17 +15,21 @@
 // specific language governing permissions and limitations
 // under the License.argv._
 
-process.argv.push('--registry', 'registry1');
-process.argv.push('--replacePackageLockRegistry');
-process.argv.push('--skipIntegrity');
+process.argv.push("--registry", "registry1");
+process.argv.push("--replacePackageLockRegistry");
+process.argv.push("--skipIntegrity");
 
-jest.mock('../../lib/treat-locks/npm.lock');
-jest.mock('../../lib/treat-locks/yarn.lock');
-jest.mock('../../lib/treat-locks/npm.options');
+jest.spyOn(console, "log").mockImplementation(() => {});
+jest.spyOn(console, "warn").mockImplementation(() => {});
+jest.spyOn(console, "info").mockImplementation(() => {});
 
-const npmLockMock = require('../../lib/treat-locks/npm.lock');
-const yarnLockMock = require('../../lib/treat-locks/yarn.lock');
-const NpmOptionsMock = require('../../lib/treat-locks/npm.options');
+jest.mock("../../lib/treat-locks/npm.lock");
+jest.mock("../../lib/treat-locks/yarn.lock");
+jest.mock("../../lib/treat-locks/npm.options");
+
+const npmLockMock = require("../../lib/treat-locks/npm.lock");
+const yarnLockMock = require("../../lib/treat-locks/yarn.lock");
+const NpmOptionsMock = require("../../lib/treat-locks/npm.options");
 
 const spy = jest.fn();
 
@@ -39,10 +43,23 @@ beforeEach(() => {
   NpmOptionsMock.mockClear();
 });
 
-it('Run with folder', () => {
-  const treatLockFiles = require('../../script/treat-lock-files');
+it("Run with folder", () => {
+  // Arrange
+  const treatLockFiles = require("../../script/treat-lock-files");
+
+  // Act
   treatLockFiles();
-  expect(NpmOptionsMock).toHaveBeenCalledWith('registry1', true, true);
-  expect(npmLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
-  expect(yarnLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
+
+  // Assert
+  expect(NpmOptionsMock).toHaveBeenCalledWith("registry1", true, true);
+  expect(npmLockMock).toHaveBeenCalledWith(
+    ".",
+    ".",
+    expect.any(NpmOptionsMock)
+  );
+  expect(yarnLockMock).toHaveBeenCalledWith(
+    ".",
+    ".",
+    expect.any(NpmOptionsMock)
+  );
 });

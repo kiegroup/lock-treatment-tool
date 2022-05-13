@@ -18,21 +18,25 @@
 const commonLock = require('../../lib/treat-locks/common.lock');
 
 test('Verify yarnlock host replaced with final slash', () => {
+  // Act
   expect(commonLock.replaceHost('  resolved "https://repository.engineering.redhat.com/nexus/repository/registry.npmjs.org/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"', 'http://redhat.com/'))
     .toBe('  resolved "http://redhat.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"');
 });
 
 test('Verify yarnlock host replaced without final slash', () => {
+  // Act
   expect(commonLock.replaceHost('  resolved "https://repository.engineering.redhat.com/nexus/repository/registry.npmjs.org/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"', 'http://redhat.com'))
     .toBe('  resolved "http://redhat.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"');
 });
 
 test('Verify yarnlock getHost Ok', () => {
+  // Act
   expect(commonLock.getHost('  resolved "https://repository.engineering.redhat.com/nexus/repository/registry.npmjs.org/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"'))
     .toBe('https://repository.engineering.redhat.com/nexus/repository/registry.npmjs.org/');
 });
 
 test('Verify package-lock.json getHost Ok', () => {
+  // Act
   expect(commonLock.getHost('https://repository.engineering.redhat.com/nexus/repository/registry.npmjs.org/@babel/code-frame/-/code-frame-7.5.5.tgz'))
     .toBe('https://repository.engineering.redhat.com/nexus/repository/registry.npmjs.org/');
 });

@@ -21,6 +21,10 @@ const yarnLock = require('../../lib/treat-locks/yarn.lock');
 const commonLock = require('../../lib/treat-locks/common.lock');
 const NpmOptions = require('../../lib/treat-locks/npm.options');
 
+jest.spyOn(console, "log").mockImplementation(() => {});
+jest.spyOn(console, "warn").mockImplementation(() => {});
+jest.spyOn(console, "info").mockImplementation(() => {});
+
 function checkLine(line, npmOptions) {
   if (line.startsWith('  resolved "http')) {
     return npmOptions.registry === commonLock.getHost(line);
@@ -32,17 +36,24 @@ function checkLine(line, npmOptions) {
 }
 
 test('Verify still working if the file yarn.lock does not exist', async () => {
+  // Act && Assert
   await expect(yarnLock('./test', './test')).resolves.toBe(false);
 });
 
 test('Verify it does not work when the file yarn.lock exists but registry', async () => {
+  // Arrange
   const uuid = uuidv4();
+
+  // Act && Assert
   await expect(yarnLock('./test/resources', `./test/resources/execution-${uuid}`)).resolves.toBe(false);
 });
 
 test('Verify it works when the file yarn.lock exists', async () => {
+  // Arrange
   const uuid = uuidv4();
   const npmOptions = new NpmOptions('http://redhat.com/');
+  
+  // Act && Assert
   await expect(yarnLock('./test/resources', `./test/resources/execution-${uuid}`, npmOptions)).resolves.toBe(true);
 
   await expect(fileUtil.readLineSync(`./test/resources/execution-${uuid}/yarn.lock`, async (line) => {

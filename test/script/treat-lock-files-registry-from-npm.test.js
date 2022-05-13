@@ -47,9 +47,13 @@ describe('treat-lock-files arguments from npm command', () => {
   });
 
   test('registry defined on npm command', () => {
+    // Arrange
     process.env.npm_config_argv = '{"remain":[],"cooked":["run","execute","--registry","whatever"],"original":["run","execute","--registry=whatever"]}';
 
+    // Act
     treatLockFiles();
+
+    // Assert
     expect(console.log).toHaveBeenCalledTimes(2);
     expect(NpmOptionsMock).toHaveBeenCalledWith('whatever', undefined, undefined);
     expect(npmLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
@@ -57,9 +61,13 @@ describe('treat-lock-files arguments from npm command', () => {
   });
 
   test('registry defined on npm command. Empty', () => {
+    // Arrange
     process.env.npm_config_argv = '{"remain":[],"cooked":["run","execute","--registry","whatever"],"original":["run","execute","--registry="]}';
 
+    // Act
     treatLockFiles();
+
+    // Assert
     expect(console.log).toHaveBeenCalledTimes(2);
     expect(NpmOptionsMock).toHaveBeenCalledWith('', undefined, undefined);
     expect(npmLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
@@ -67,9 +75,13 @@ describe('treat-lock-files arguments from npm command', () => {
   });
 
   test('npm_config_argv original empty', () => {
+    // Arrange
     process.env.npm_config_argv = '{"remain":[],"cooked":["run","execute","--registry","whatever"],"original":[]}';
 
+    // Act
     treatLockFiles();
+
+    // Assert
     expect(console.log).toHaveBeenCalledTimes(1);
     expect(NpmOptionsMock).toHaveBeenCalledWith(undefined, undefined, undefined);
     expect(npmLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
@@ -77,9 +89,13 @@ describe('treat-lock-files arguments from npm command', () => {
   });
 
   test('npm_config_argv but original', () => {
+    // Arrange
     process.env.npm_config_argv = '{"remain":[],"cooked":["run","execute","--registry","whatever"]}';
 
+    // Act
     treatLockFiles();
+
+    // Assert
     expect(console.log).toHaveBeenCalledTimes(1);
     expect(NpmOptionsMock).toHaveBeenCalledWith(undefined, undefined, undefined);
     expect(npmLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
