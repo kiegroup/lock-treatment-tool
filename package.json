@@ -47,7 +47,7 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^23.0.2",
     "husky": "^8.0.1",
-    "jest": "^24.9.0",
+    "jest": "^28.1.0",
     "rimraf": "^3.0.0",
     "uuid": "^8.3.2"
   }
