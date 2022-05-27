@@ -16,16 +16,23 @@
 // under the License.argv._
 
 const commonLock = require('../../lib/treat-locks/common.lock');
+const NpmOptions = require('../../lib/treat-locks/npm.options');
 
-test('Verify yarnlock host replaced with final slash', () => {
+test('Verify register has an appended final slash when input does not have a final slash', () => {
+  const options = new NpmOptions('http://redhat.com');
   // Act
-  expect(commonLock.replaceHost('  resolved "https://repository.engineering.redhat.com/nexus/repository/registry.npmjs.org/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"', 'http://redhat.com/'))
-    .toBe('  resolved "http://redhat.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"');
+  expect(options.registry).toBe('http://redhat.com/');
 });
 
-test('Verify yarnlock host replaced without final slash', () => {
+test('Verify register has a single appended final slash when input does have a final slash', () => {
+  const options = new NpmOptions('http://redhat.com/');
   // Act
-  expect(commonLock.replaceHost('  resolved "https://repository.engineering.redhat.com/nexus/repository/registry.npmjs.org/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"', 'http://redhat.com'))
+  expect(options.registry).toBe('http://redhat.com/');
+});
+
+test('Verify yarnlock host replaced', () => {
+  // Act
+  expect(commonLock.replaceHost('  resolved "https://repository.engineering.redhat.com/nexus/repository/registry.npmjs.org/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"', 'http://redhat.com/'))
     .toBe('  resolved "http://redhat.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"');
 });
 
