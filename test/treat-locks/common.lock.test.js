@@ -16,19 +16,6 @@
 // under the License.argv._
 
 const commonLock = require('../../lib/treat-locks/common.lock');
-const NpmOptions = require('../../lib/treat-locks/npm.options');
-
-test('Verify register has an appended final slash when input does not have a final slash', () => {
-  const options = new NpmOptions('http://redhat.com');
-  // Act
-  expect(options.registry).toBe('http://redhat.com/');
-});
-
-test('Verify register has a single appended final slash when input does have a final slash', () => {
-  const options = new NpmOptions('http://redhat.com/');
-  // Act
-  expect(options.registry).toBe('http://redhat.com/');
-});
 
 test('Verify yarnlock host replaced', () => {
   // Act
