@@ -1,3 +1,7 @@
+# 2022-05-13, Version 0.1.1
+
+- Improved performance of yarn lock treatment by approximately 70% 
+
 # 2022-05-13, Version 0.1.0
 
 - Security issues solved
