@@ -23,9 +23,10 @@ or run using `npx` or `exec`
 ## locktt
 
 **What locktt will do**:
- - looks for package-lock.json, npm-shrinkwrap.json and yarn.lock files
+ - looks for package-lock.json, npm-shrinkwrap.json, yarn.lock and pnpm-lock.yaml files
  - removes the `resolved` and `integrity` fields from the package-lock.json and/or npm-shrinkwrap.json files in case it finds them
  - replaces the `resolved` field from yarn.lock file adding the `--registry` value instead of the host and remove the `integrity` field
+ - replaces all hosts (in resolution field, in dependency references etc) with value specified in `--registry` and removes all the `integrity` fields from pnpm-lock.yaml file
  - overwrites/saves the file
 
 **Usage**: `locktt [options]`
