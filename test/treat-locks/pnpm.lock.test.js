@@ -21,7 +21,7 @@ const pnpmLock = require('../../lib/treat-locks/pnpm.lock');
 const NpmOptions = require('../../lib/treat-locks/npm.options');
 
 const DOMAIN_REG_EX = /((https?:\/\/)|\s+)(([a-zA-Z0-9]+\.[a-zA-Z0-9]+)+\/)(([^\s/$]*\/)?[^\s]*)/;
-const INTEGRITY_REG_EX = /^\s*((resolution:)|{)\s*integrity/;
+const INTEGRITY = 'integrity: ';
 
 jest.spyOn(console, 'log').mockImplementation(() => {});
 jest.spyOn(console, 'warn').mockImplementation(() => {});
@@ -31,7 +31,7 @@ function checkDependencies(file, npmOptions) {
   const data = fs.readFileSync(file, 'utf8').split('\n');
   for (let i = 0; i < data.length; i += 1) {
     if (DOMAIN_REG_EX.test(data[i]) && !data[i].includes(npmOptions.registry)) return false;
-    if (INTEGRITY_REG_EX.test(data[i]) && !npmOptions.skipIntegrity) return false;
+    if (data[i].includes(INTEGRITY) && !npmOptions.skipIntegrity) return false;
   }
   return true;
 }
