@@ -1,3 +1,7 @@
+# 2022-05-31, Version 0.2.0
+
+- Added treatment for pnpm lock file
+
 # 2022-05-30, Version 0.1.1
 
 - Improved performance of yarn lock treatment by approximately 70% 

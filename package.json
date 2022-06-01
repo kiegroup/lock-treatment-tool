@@ -1,7 +1,7 @@
 {
   "name": "@kie/lock-treatment-tool",
-  "version": "0.1.1",
-  "description": "Npm (package-lock-json, npm-shrinkwrap.json) and Yarn lock files treatment tool",
+  "version": "0.2.0",
+  "description": "Npm (package-lock-json, npm-shrinkwrap.json), Yarn lock and Pnpm lock files treatment tool",
   "main": "index.js",
   "repository": {
     "type": "git",

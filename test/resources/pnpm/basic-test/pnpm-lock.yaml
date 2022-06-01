@@ -1,0 +1,15 @@
+dependecies:
+  registry.npmjs.org/@babel/runtime/7.16.7:
+      resolution:
+        {
+          integrity: sha512-9E9FJowqAsytyOY6LG+1KuueckRL+aQW+mKvXRXnuFGyRAyepJPmEo9vgMfXUA6O9u3IeEdv9MAkppFcaQwogQ==,
+          registry: https://registry.yarnpkg.com/,
+          tarball: https://registry.npmjs.org/@babel/runtime/-/runtime-7.16.7.tgz,
+        }
+      name: "@babel/runtime"
+      version: 7.16.7
+      engines: { node: ">=6.9.0" }
+      dependencies:
+        regenerator-runtime: registry.npmjs.org/regenerator-runtime/0.13.9
+      dev: true
+      

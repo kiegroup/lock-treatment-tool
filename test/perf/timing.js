@@ -19,6 +19,7 @@ const { v4: uuidv4 } = require('uuid');
 const { performance } = require('perf_hooks');
 const npmLock = require('../../lib/treat-locks/npm.lock');
 const yarnLock = require('../../lib/treat-locks/yarn.lock');
+const pnpmLock = require('../../lib/treat-locks/pnpm.lock');
 const NpmOptions = require('../../lib/treat-locks/npm.options');
 
 const { log } = console;
@@ -78,7 +79,21 @@ const perfYarn = () => {
   log(`yarn ran in: ${duration}`);
 };
 
+const perfPNPM = () => {
+  // Arrange
+  const uuid = uuidv4();
+  const npmOptions = new NpmOptions('http://redhat.com');
+
+  // Act
+  const startTime = performance.now();
+  pnpmLock('./test/resources/pnpm/actual-file-test', `./test/resources/execution-${uuid}`, npmOptions);
+  const endTime = performance.now();
+  const duration = endTime - startTime;
+  log(`pnpm ran in: ${duration}`);
+};
+
 perfNPMv7();
 perfNPM();
 perfYarn();
 perfNPMShrinkWrap();
+perfPNPM();
