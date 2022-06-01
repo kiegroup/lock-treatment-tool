@@ -100,10 +100,7 @@ We are glad to tell you this problem disappears since locktt version >0.0.1, we 
 
 ### Restrictions
 
-* Version **>=0.4.1**:
-  * *NodeJS* >= 7.6.0
-* Version **<=0.4.0**:
-  * *NodeJS* >= 5.0.0
+* *NodeJS* >= 12
 
 #### copyright
 
