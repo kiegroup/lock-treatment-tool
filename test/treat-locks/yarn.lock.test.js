@@ -35,17 +35,17 @@ function checkLine(line, npmOptions) {
   return true;
 }
 
-test('Verify still working if the file yarn.lock does not exist', async () => {
+test('Verify still working if the file yarn.lock does not exist', () => {
   // Act && Assert
-  await expect(yarnLock('./test', './test')).resolves.toBe(false);
+  expect(yarnLock('./test', './test')).toBe(false);
 });
 
-test('Verify it does not work when the file yarn.lock exists but registry', async () => {
+test('Verify it does not work when the file yarn.lock exists but registry', () => {
   // Arrange
   const uuid = uuidv4();
 
   // Act && Assert
-  await expect(yarnLock('./test/resources', `./test/resources/execution-${uuid}`)).resolves.toBe(false);
+  expect(yarnLock('./test/resources', `./test/resources/execution-${uuid}`)).toBe(false);
 });
 
 test('Verify it works when the file yarn.lock exists', async () => {
@@ -54,7 +54,7 @@ test('Verify it works when the file yarn.lock exists', async () => {
   const npmOptions = new NpmOptions('http://redhat.com/');
 
   // Act && Assert
-  await expect(yarnLock('./test/resources', `./test/resources/execution-${uuid}`, npmOptions)).resolves.toBe(true);
+  expect(yarnLock('./test/resources', `./test/resources/execution-${uuid}`, npmOptions)).toBe(true);
 
   await expect(fileUtil.readLineSync(`./test/resources/execution-${uuid}/yarn.lock`, async (line) => {
     expect(checkLine(line, npmOptions)).toBe(true);

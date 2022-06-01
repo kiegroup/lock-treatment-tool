@@ -17,15 +17,9 @@
 
 const commonLock = require('../../lib/treat-locks/common.lock');
 
-test('Verify yarnlock host replaced with final slash', () => {
+test('Verify yarnlock host replaced', () => {
   // Act
   expect(commonLock.replaceHost('  resolved "https://repository.engineering.redhat.com/nexus/repository/registry.npmjs.org/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"', 'http://redhat.com/'))
-    .toBe('  resolved "http://redhat.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"');
-});
-
-test('Verify yarnlock host replaced without final slash', () => {
-  // Act
-  expect(commonLock.replaceHost('  resolved "https://repository.engineering.redhat.com/nexus/repository/registry.npmjs.org/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"', 'http://redhat.com'))
     .toBe('  resolved "http://redhat.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"');
 });
 
