@@ -15,18 +15,16 @@
 // specific language governing permissions and limitations
 // under the License.argv._
 
-class NpmOptions {
-  constructor(registry = undefined, replacePackageLockRegistry = false, skipIntegrity = false) {
-    this.registry = (registry !== undefined && registry.charAt(registry.length - 1) !== '/') ? `${registry}/` : registry;
-    this.replacePackageLockRegistry = replacePackageLockRegistry;
-    this.skipIntegrity = skipIntegrity;
-  }
+const NpmOptions = require('../../lib/treat-locks/npm.options');
 
-  toString() {
-    return `{registry: ${this.registry},
-    replacePackageLockRegistry: ${this.replacePackageLockRegistry},
-    skipIntegrity: ${this.skipIntegrity}}`;
-  }
-}
+test('Verify register has an appended final slash when input does not have a final slash', () => {
+  const options = new NpmOptions('http://redhat.com');
+  // Act
+  expect(options.registry).toBe('http://redhat.com/');
+});
 
-module.exports = NpmOptions;
+test('Verify register has a single appended final slash when input does have a final slash', () => {
+  const options = new NpmOptions('http://redhat.com/');
+  // Act
+  expect(options.registry).toBe('http://redhat.com/');
+});
