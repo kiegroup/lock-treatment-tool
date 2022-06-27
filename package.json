@@ -1,8 +1,8 @@
 {
   "name": "@kie/lock-treatment-tool",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Npm (package-lock-json, npm-shrinkwrap.json), Yarn lock and Pnpm lock files treatment tool",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:kiegroup/lock-treatment-tool"
@@ -26,13 +26,14 @@
   "scripts": {
     "prepare": "husky install",
     "test": "jest && rimraf 'test/resources/**/execution-*'",
-    "lint": "eslint '**/*.js' --ignore-pattern node_modules/",
+    "lint": "eslint '**/*.js'",
     "lint:fix": "eslint '**/*.js' --ignore-pattern node_modules/ --fix",
     "prepublish": "npm test",
-    "test:performance": "node test/perf/timing.js && rimraf 'test/resources/**/execution-*'"
+    "test:performance": "node test/perf/timing.js && rimraf 'test/resources/**/execution-*'",
+    "ncc-build": "ncc build --minify index.js"
   },
   "bin": {
-    "locktt": "bin/locktt.js"
+    "locktt": "dist/index.js"
   },
   "engines": {
     "node": "^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0"
@@ -42,6 +43,7 @@
     "yargs": "^17.5.0"
   },
   "devDependencies": {
+    "@zeit/ncc": "^0.22.3",
     "eslint": "^8.15.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-header": "^3.0.0",
@@ -51,5 +53,8 @@
     "jest": "^28.1.0",
     "rimraf": "^3.0.0",
     "uuid": "^8.3.2"
-  }
+  },
+  "files": [
+    "dist/index.js"
+  ]
 }
