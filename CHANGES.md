@@ -1,4 +1,4 @@
-# 2022-10-05, Version 0.2.1
+# 2022-10-05, Version 0.2.2
 
 - Added support for node engine 16.2.0
 
