@@ -13,9 +13,10 @@
         "yargs": "^17.5.0"
       },
       "bin": {
-        "locktt": "bin/locktt.js"
+        "locktt": "dist/index.js"
       },
       "devDependencies": {
+        "@zeit/ncc": "^0.22.3",
         "eslint": "^8.15.0",
         "eslint-config-airbnb-base": "^15.0.0",
         "eslint-plugin-header": "^3.0.0",
@@ -1207,6 +1208,16 @@
       },
       "engines": {
         "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
+      }
+    },
+    "node_modules/@zeit/ncc": {
+      "version": "0.22.3",
+      "resolved": "https://registry.npmjs.org/@zeit/ncc/-/ncc-0.22.3.tgz",
+      "integrity": "sha512-jnCLpLXWuw/PAiJiVbLjA8WBC0IJQbFeUwF4I9M+23MvIxTxk5pD4Q8byQBSPmHQjz5aBoA7AKAElQxMpjrCLQ==",
+      "deprecated": "@zeit/ncc is no longer maintained. Please use @vercel/ncc instead.",
+      "dev": true,
+      "bin": {
+        "ncc": "dist/ncc/cli.js"
       }
     },
     "node_modules/acorn": {
@@ -5726,6 +5737,12 @@
         "@typescript-eslint/types": "5.23.0",
         "eslint-visitor-keys": "^3.0.0"
       }
+    },
+    "@zeit/ncc": {
+      "version": "0.22.3",
+      "resolved": "https://registry.npmjs.org/@zeit/ncc/-/ncc-0.22.3.tgz",
+      "integrity": "sha512-jnCLpLXWuw/PAiJiVbLjA8WBC0IJQbFeUwF4I9M+23MvIxTxk5pD4Q8byQBSPmHQjz5aBoA7AKAElQxMpjrCLQ==",
+      "dev": true
     },
     "acorn": {
       "version": "8.7.1",
