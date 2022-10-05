@@ -2,6 +2,10 @@
 
 - Added support for node engine 16.2.0
 
+# 2022-06-27, Version 0.2.1
+
+- Reduced npm artifact size
+
 # 2022-05-31, Version 0.2.0
 
 - Added treatment for pnpm lock file
