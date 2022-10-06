@@ -1,3 +1,7 @@
+# 2022-10-06, Version 0.1.2
+
+- Added support for node engine >=12.13.0
+
 # 2022-05-30, Version 0.1.1
 
 - Improved performance of yarn lock treatment by approximately 70% 
