@@ -1,6 +1,6 @@
 {
   "name": "@kie/lock-treatment-tool",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "description": "Npm (package-lock-json, npm-shrinkwrap.json), Yarn lock and Pnpm lock files treatment tool",
   "main": "dist/index.js",
   "repository": {
@@ -30,13 +30,13 @@
     "lint:fix": "eslint '**/*.js' --ignore-pattern node_modules/ --fix",
     "prepublish": "npm test",
     "test:performance": "node test/perf/timing.js && rimraf 'test/resources/**/execution-*'",
-    "ncc-build": "ncc build --minify index.js"
+    "build": "ncc build --minify index.js"
   },
   "bin": {
     "locktt": "dist/index.js"
   },
   "engines": {
-    "node": ">=12.13.0"
+    "node": ">=16.0.0"
   },
   "dependencies": {
     "line-reader": "^0.4.0",
