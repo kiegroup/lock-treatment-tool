@@ -1,3 +1,7 @@
+# 2023-04-19, Version 0.2.3
+
+- Added support for NPM package-lock v3
+
 # 2022-10-05, Version 0.2.2
 
 - Added support for node engine >=12.13.0
