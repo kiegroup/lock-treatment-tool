@@ -66,6 +66,7 @@ const { argv } = require('yargs')
 
 const npmLock = require('../lib/treat-locks/npm.lock');
 const yarnLock = require('../lib/treat-locks/yarn.lock');
+const pnpmLock = require('../lib/treat-locks/pnpm.lock');
 const NpmOptions = require('../lib/treat-locks/npm.options');
 
 /**
@@ -100,6 +101,7 @@ function run() {
   );
   npmLock(folderPath, outputFolderPath, npmOptions);
   yarnLock(folderPath, outputFolderPath, npmOptions);
+  pnpmLock(folderPath, outputFolderPath, npmOptions);
 }
 
 module.exports = run;
