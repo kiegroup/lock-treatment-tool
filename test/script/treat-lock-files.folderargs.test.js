@@ -19,6 +19,7 @@ process.argv.push('--folder', './path');
 
 jest.mock('../../lib/treat-locks/npm.lock');
 jest.mock('../../lib/treat-locks/yarn.lock');
+jest.mock('../../lib/treat-locks/pnpm.lock');
 jest.mock('../../lib/treat-locks/npm.options');
 
 jest.spyOn(console, 'log').mockImplementation(() => {});
