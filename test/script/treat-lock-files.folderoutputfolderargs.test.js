@@ -20,6 +20,7 @@ process.argv.push('--outputFolder', './path2');
 
 jest.mock('../../lib/treat-locks/npm.lock');
 jest.mock('../../lib/treat-locks/yarn.lock');
+jest.mock('../../lib/treat-locks/pnpm.lock');
 jest.mock('../../lib/treat-locks/npm.options');
 
 jest.spyOn(console, 'log').mockImplementation(() => {});
@@ -28,6 +29,7 @@ jest.spyOn(console, 'info').mockImplementation(() => {});
 
 const npmLockMock = require('../../lib/treat-locks/npm.lock');
 const yarnLockMock = require('../../lib/treat-locks/yarn.lock');
+const pnpmLockMock = require('../../lib/treat-locks/pnpm.lock');
 const NpmOptionsMock = require('../../lib/treat-locks/npm.options');
 
 const spy = jest.fn();
@@ -53,4 +55,5 @@ it('Run with folder and outputFolder', () => {
   expect(NpmOptionsMock).toHaveBeenCalledWith(undefined, undefined, undefined);
   expect(npmLockMock).toHaveBeenCalledWith('./path', './path2', expect.any(NpmOptionsMock));
   expect(yarnLockMock).toHaveBeenCalledWith('./path', './path2', expect.any(NpmOptionsMock));
+  expect(pnpmLockMock).toHaveBeenCalledWith('./path', './path2', expect.any(NpmOptionsMock));
 });

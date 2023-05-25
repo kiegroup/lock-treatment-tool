@@ -19,10 +19,12 @@ const treatLockFiles = require('../../script/treat-lock-files');
 
 jest.mock('../../lib/treat-locks/npm.lock');
 jest.mock('../../lib/treat-locks/yarn.lock');
+jest.mock('../../lib/treat-locks/pnpm.lock');
 jest.mock('../../lib/treat-locks/npm.options');
 
 const npmLockMock = require('../../lib/treat-locks/npm.lock');
 const yarnLockMock = require('../../lib/treat-locks/yarn.lock');
+const pnpmLockMock = require('../../lib/treat-locks/pnpm.lock');
 const NpmOptionsMock = require('../../lib/treat-locks/npm.options');
 
 const spy = jest.fn();
@@ -58,6 +60,7 @@ describe('treat-lock-files arguments from npm command', () => {
     expect(NpmOptionsMock).toHaveBeenCalledWith('whatever', undefined, undefined);
     expect(npmLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
     expect(yarnLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
+    expect(pnpmLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
   });
 
   test('registry defined on npm command. Empty', () => {
@@ -72,6 +75,7 @@ describe('treat-lock-files arguments from npm command', () => {
     expect(NpmOptionsMock).toHaveBeenCalledWith('', undefined, undefined);
     expect(npmLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
     expect(yarnLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
+    expect(pnpmLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
   });
 
   test('npm_config_argv original empty', () => {
@@ -86,6 +90,7 @@ describe('treat-lock-files arguments from npm command', () => {
     expect(NpmOptionsMock).toHaveBeenCalledWith(undefined, undefined, undefined);
     expect(npmLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
     expect(yarnLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
+    expect(pnpmLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
   });
 
   test('npm_config_argv but original', () => {
@@ -100,5 +105,6 @@ describe('treat-lock-files arguments from npm command', () => {
     expect(NpmOptionsMock).toHaveBeenCalledWith(undefined, undefined, undefined);
     expect(npmLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
     expect(yarnLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
+    expect(pnpmLockMock).toHaveBeenCalledWith('.', '.', expect.any(NpmOptionsMock));
   });
 });
