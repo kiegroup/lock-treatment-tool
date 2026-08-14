@@ -4,4 +4,10 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "monthly"
+    exclude-paths:
+      - "**/test/resources/**"
+      - "**/src/test/resources/**"
+    # Only update production dependencies (excludes devDependencies/test tools)
+    allow:
+      - dependency-type: "production"
